@@ -1,0 +1,30 @@
+.home-container .header {
+  position: fixed;
+  left: 0;
+  z-index: 1000;
+}
+.main {
+  display: flex;
+  padding-top: 80px;
+  position: fixed;
+  left: 0;
+}
+
+.main .play-area {
+  width: 82vw;
+  height: 80vh;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-direction: column;
+  overflow-y: scroll;
+  /* border: 1px solid green; */
+  /* margin: 10px; */
+}
+
+.main .play-area::-webkit-scrollbar {
+  display: none;
+}
+.main.dark {
+  background-color: #0f0f0f;
+}

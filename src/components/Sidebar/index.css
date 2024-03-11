@@ -1,0 +1,75 @@
+.sidebar-container {
+  /* border: 5px solid red; */
+  height: 85vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.sidebar-container .contact-us {
+  /* border: 5px solid red; */
+  height: 24%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  margin-left: 15%;
+}
+.side-menu {
+  /* position: fixed; */
+  list-style-type: none;
+  /* height: 90vh; */
+  width: 18vw;
+  /* border: 1px solid red; */
+  margin: 0;
+  /* margin-right: 20vw; */
+}
+
+.side-menu li button {
+  display: flex;
+  width: 100%;
+  cursor: pointer;
+  font-size: 25px;
+  outline: none;
+  background: none;
+  border: none;
+}
+.side-menu li a {
+  text-decoration: none;
+}
+
+.side-menu .focus-element {
+  background-color: #d7dfe9;
+  font-weight: 500;
+}
+
+.side-menu .focus-element span {
+  color: #ff0b37;
+}
+
+.side-menu button > * {
+  margin: 0.5rem;
+}
+
+.sidebar-container .contact-us .social-media-icons {
+  width: 90%;
+  /* border: 3px solid green; */
+}
+
+.sidebar-container .contact-us .social-media-icons img {
+  width: 15%;
+  margin-right: 7%;
+}
+
+.sidebar-container.dark {
+  background-color: #252424;
+  color: white;
+}
+
+.dark .side-menu li a button {
+  color: white;
+}
+
+.dark .side-menu .focus-element {
+  background-color: #424242;
+  font-weight: 500;
+}

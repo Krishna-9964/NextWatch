@@ -1,0 +1,19 @@
+.failure-container {
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  font-family: "Roboto";
+  background-color: #f8fafc;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.failure-container img {
+  width: 20%;
+}
+
+.failure-container h5 {
+  color: #7b7c7c;
+}

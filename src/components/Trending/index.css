@@ -1,0 +1,22 @@
+.home-container .header {
+  position: fixed;
+  left: 0;
+  z-index: 1000;
+}
+.main {
+  display: flex;
+  padding-top: 80px;
+  position: fixed;
+  left: 0;
+}
+
+.main .play-area {
+  width: 82vw;
+  height: 80vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  /* border: 1px solid green; */
+  /* margin: 10px; */
+}
