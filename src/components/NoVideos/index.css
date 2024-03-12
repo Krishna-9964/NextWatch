@@ -17,3 +17,11 @@
 .failure-container h5 {
   color: #7b7c7c;
 }
+
+.failure-container.dark {
+  background-color: #0f0f0f;
+}
+
+.failure-container.dark h2 {
+  color: #ffffff;
+}

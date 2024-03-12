@@ -1,12 +1,9 @@
 import Header from "../Header";
 import Sidebar from "../Sidebar";
 import TrendingVideo from "../TrendingVideo";
-import Failure from "../Failure";
-import { useState, useEffect, useContext } from "react";
+import { useContext } from "react";
 import ThemeContext from "../../context/ThemeContext";
 import SavedVideoContext from "../../context/SavedVideoContext";
-import Cookies from "js-cookie";
-import Loader from "react-loader-spinner";
 import "../Trending/index.css";
 
 const SavedVideos = () => {
@@ -24,21 +21,6 @@ const SavedVideos = () => {
     },
   }));
 
-  useEffect(() => {
-    console.log(savedVideos);
-  }, []);
-
-  const tryAgain = () => {};
-
-  const renderLoadingView = () => (
-    <Loader
-      type="Rings"
-      color={activeTheme === "dark" ? "#ffffff" : "#0f0f0f"}
-      height={160}
-      width={160}
-    />
-  );
-
   const renderSuccessView = () => {
     return (
       <TrendingVideo
@@ -49,7 +31,17 @@ const SavedVideos = () => {
   };
 
   const renderFailureView = () => {
-    return <Failure retry={tryAgain} />;
+    return (
+      <div className={`failure-container ${activeTheme}`}>
+        <img
+          src="https://assets.ccbp.in/frontend/react-js/nxt-watch-no-saved-videos-img.png"
+          alt="no saved videos"
+        />{" "}
+        <br />
+        <h2>No Saved Videos Found</h2>
+        <h5>You can save your videos while watching them.</h5>
+      </div>
+    );
   };
 
   return (
