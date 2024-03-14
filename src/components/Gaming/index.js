@@ -1,36 +1,15 @@
-import VideoDetails from "../VideoDetails";
 import Header from "../Header";
 import Sidebar from "../Sidebar";
-import HomeVideos from "../HomeVideos";
-import { useEffect, useState, useContext } from "react";
+import TrendingVideo from "../TrendingVideo";
+import GamingVideos from "../GamingVideos";
+
+import Failure from "../Failure";
+import { useState, useEffect, useContext } from "react";
+import ThemeContext from "../../context/ThemeContext";
 import Cookies from "js-cookie";
 import Loader from "react-loader-spinner";
-import { IoCloseOutline } from "react-icons/io5";
-import SearchBar from "../SearchBar";
-import Failure from "../Failure";
-import ThemeContext from "../../context/ThemeContext";
-import { useParams } from "react-router-dom";
 import "./index.css";
-
-const videoDetails = {
-  id: "ad9822d2-5763-41d9-adaf-baf9da3fd490",
-  title: "iB Hubs Announcement Event",
-  video_url: "https://www.youtube.com/watch?v=pT2ojWWjum8",
-  thumbnail_url:
-    "https://assets.ccbp.in/frontend/react-js/nxt-watch/ibhubs-img.png",
-  channel: {
-    name: "iB Hubs",
-    profile_image_url:
-      "https://assets.ccbp.in/frontend/react-js/nxt-watch/ib-hubs-img.png",
-    subscriber_count: "1M",
-  },
-  view_count: "26K",
-  published_at: "Nov 29, 2016",
-  description:
-    "iB Hubs grandly celebrated its Announcement Event in November 13, 2016, in the presence of many eminent personalities from the Government, Industry, and Academia with Shri Amitabh Kant, CEO, NITI Aayog as the Chief Guest.",
-};
-
-const apiUrl = "https://apis.ccbp.in/videos/";
+const apiUrl = "https://apis.ccbp.in/videos/gaming";
 
 const apiStatusConstants = {
   initial: "INITIAL",
@@ -39,10 +18,8 @@ const apiStatusConstants = {
   failure: "FAILURE",
 };
 
-const VideoItemDetails = () => {
-  const { id } = useParams();
+const Gaming = () => {
   const { activeTheme } = useContext(ThemeContext);
-
   const [apiDetails, setApiDetails] = useState({
     apiStatus: apiStatusConstants.initial,
     responseData: null,
@@ -50,8 +27,7 @@ const VideoItemDetails = () => {
   });
 
   const jwtToken = Cookies.get("jwt_token");
-
-  const getVideoDetails = async () => {
+  const getGamingVideos = async () => {
     setApiDetails({
       apiStatus: apiStatusConstants.inProgress,
       responseData: null,
@@ -68,7 +44,7 @@ const VideoItemDetails = () => {
     let response = null;
     let fetchedData = null;
     try {
-      response = await fetch(apiUrl + id, options);
+      response = await fetch(apiUrl, options);
       fetchedData = await response.json();
     } catch (e) {
       response = {
@@ -79,10 +55,17 @@ const VideoItemDetails = () => {
 
     if (response.ok) {
       //Format the data
-      const formattedData = fetchedData.video_details;
+      const formattedData = fetchedData.videos.map((eachVideo) => {
+        return {
+          id: eachVideo.id,
+          thumbnailUrl: eachVideo.thumbnail_url,
+          title: eachVideo.title,
+          viewCount: eachVideo.view_count,
+        };
+      });
 
       //Update the api details with the formatted data
-      console.log(formattedData);
+
       setApiDetails({
         apiStatus: apiStatusConstants.success,
         responseData: formattedData,
@@ -101,24 +84,24 @@ const VideoItemDetails = () => {
   };
 
   useEffect(() => {
-    getVideoDetails();
+    getGamingVideos();
   }, []);
 
   const tryAgain = () => {
-    getVideoDetails();
+    getGamingVideos();
   };
 
   const renderLoadingView = () => (
     <Loader
       type="Rings"
       color={activeTheme === "dark" ? "#ffffff" : "#0f0f0f"}
-      height={80}
-      width={80}
+      height={160}
+      width={160}
     />
   );
 
   const renderSuccessView = () => {
-    return <VideoDetails videoDetails={apiDetails.responseData} />;
+    return <GamingVideos videos={apiDetails.responseData} />;
   };
 
   const renderFailureView = () => {
@@ -133,24 +116,26 @@ const VideoItemDetails = () => {
       </div>
 
       <div className={`main ${activeTheme}`}>
-        <Sidebar focusButton="" />
-        <div className="play-area">
-          {(() => {
-            switch (apiDetails.apiStatus) {
-              case apiStatusConstants.inProgress:
-                return renderLoadingView();
-              case apiStatusConstants.success:
-                return renderSuccessView();
-              case apiStatusConstants.failure:
-                return renderFailureView();
-              default:
-                return <p>Default content</p>;
-            }
-          })()}
+        <Sidebar focusButton="gamingButton" />
+        <div className={`play-area ${activeTheme}`}>
+          <div className="content">
+            {(() => {
+              switch (apiDetails.apiStatus) {
+                case apiStatusConstants.inProgress:
+                  return renderLoadingView();
+                case apiStatusConstants.success:
+                  return renderSuccessView();
+                case apiStatusConstants.failure:
+                  return renderFailureView;
+                default:
+                  return <p>Default content</p>;
+              }
+            })()}
+          </div>
         </div>
       </div>
     </div>
   );
 };
 
-export default VideoItemDetails;
+export default Gaming;

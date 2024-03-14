@@ -1,7 +1,7 @@
 import { MdDarkMode } from "react-icons/md";
 import { CiLight } from "react-icons/ci";
 import Cookies from "js-cookie";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { useContext } from "react";
 import ThemeContext from "../../context/ThemeContext";
 import "./index.css";
@@ -22,15 +22,17 @@ const Header = () => {
 
   return (
     <div className={`container-fluid header-section ${activeTheme}`}>
-      <img
-        className="logo"
-        src={
-          activeTheme === "dark"
-            ? "https://assets.ccbp.in/frontend/react-js/nxt-watch-logo-dark-theme-img.png"
-            : "https://assets.ccbp.in/frontend/react-js/nxt-watch-logo-light-theme-img.png"
-        }
-        alt="logo"
-      />
+      <Link to="/">
+        <img
+          className="logo"
+          src={
+            activeTheme === "dark"
+              ? "https://assets.ccbp.in/frontend/react-js/nxt-watch-logo-dark-theme-img.png"
+              : "https://assets.ccbp.in/frontend/react-js/nxt-watch-logo-light-theme-img.png"
+          }
+          alt="logo"
+        />
+      </Link>
 
       <ul className="navigation">
         <li onClick={onClickChangeTheme}>

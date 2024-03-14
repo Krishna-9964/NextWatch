@@ -6,6 +6,7 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import NotFound from "./components/NotFound";
 import Trending from "./components/Trending";
 import SavedVideos from "./components/SavedVideos";
+import Gaming from "./components/Gaming";
 // import Sidebar from "./components/Sidebar";
 import VideoItemDetails from "./components/VideoItemDetails";
 
@@ -64,6 +65,14 @@ const App = () => {
               element={
                 <ProtectedRoute>
                   <VideoItemDetails />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/gaming"
+              element={
+                <ProtectedRoute>
+                  <Gaming />
                 </ProtectedRoute>
               }
             />
